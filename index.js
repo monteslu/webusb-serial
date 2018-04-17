@@ -27,11 +27,9 @@ function WebUSBSerialPort(options) {
 
     var readLoop = function(){
       self.device.transferIn(5, 64).then(function(result){
-        console.log('read', result);
         self.emit('data', new Buffer(result.data.buffer));
         readLoop();
       }, function(error){
-        console.log('read error', error);
         self.emit('emit', error);
       });
     };
@@ -86,7 +84,6 @@ WebUSBSerialPort.prototype.open = function (callback) {
 
 
 WebUSBSerialPort.prototype.write = function (data, callback) {
-  console.log('send', data);
   this.device.transferOut(4, data)
   .then(function(){
     if(callback){
@@ -104,7 +101,6 @@ WebUSBSerialPort.prototype.write = function (data, callback) {
 
 
 WebUSBSerialPort.prototype.close = function (callback) {
-  console.log('closing');
   var self = this;
   self.device.controlTransferOut({
               'requestType': 'class',
@@ -122,14 +118,12 @@ WebUSBSerialPort.prototype.close = function (callback) {
 };
 
 WebUSBSerialPort.prototype.flush = function (callback) {
-  console.log('flush');
   if(callback){
     callback();
   }
 };
 
 WebUSBSerialPort.prototype.drain = function (callback) {
-  console.log('drain');
   if(callback){
     callback();
   }
