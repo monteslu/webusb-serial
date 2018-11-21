@@ -16,13 +16,7 @@ function WebUSBSerialPort(options) {
   options = options || {};
   self.filters = options.filters || DEFAULT_FILTERS;
 
-  navigator.usb.getDevices().then(function(devices){
-    if(devices.length){
-      return devices[options.deviceNumber || 0];
-    }
-    return navigator.usb.requestDevice({filters: self.filters });
-  })
-  .then(function(device){
+  function handleDevice(device) {
     self.device = device;
 
     var readLoop = function(){
@@ -63,11 +57,19 @@ function WebUSBSerialPort(options) {
         self.emit('open');
         readLoop();
       });
-  })
-  .catch(function(err){
-    self.emit('error', err);
-  });
+  }
 
+  if(options.device) {
+    return handleDevice(options.device);
+  }
+  else{
+    return navigator.usb.requestDevice({filters: self.filters })
+    .then(handleDevice)
+    .catch(function(err){
+      self.emit('error', err);
+    });
+  }
+  
 }
 
 util.inherits(WebUSBSerialPort, stream.Stream);
@@ -129,8 +131,6 @@ WebUSBSerialPort.prototype.drain = function (callback) {
   }
 };
 
+WebUSBSerialPort.DEFAULT_FILTERS = DEFAULT_FILTERS;
 
-
-module.exports = {
-  SerialPort: WebUSBSerialPort
-};
+module.exports = WebUSBSerialPort;

@@ -9,12 +9,12 @@ A virtual [node-serialport](https://github.com/voodootikigod/node-serialport) im
 Use webusb to send/receive data to a USB connected physical device:
 
 ```js
-var webusbSerialPort = require('webusb-serial').SerialPort;
+var WebusbSerialPort = require('webusb-serial');
 var firmata = require('firmata');
 
 
 //create the webusb serialport and optionally specify a USB filter
-var serialPort = new webusbSerialPort({
+var serialPort = new WebusbSerialPort({
   filters: [
     { 'vendorId': 0x2341, 'productId': 0x8036 }, // Arduino Leonardo
     { 'vendorId': 0x2341, 'productId': 0x8037 }, // Arduino Micro
