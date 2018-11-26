@@ -60,10 +60,10 @@ function WebUSBSerialPort(options) {
   }
 
   if(options.device) {
-    return handleDevice(options.device);
+    handleDevice(options.device);
   }
   else{
-    return navigator.usb.requestDevice({filters: self.filters })
+    navigator.usb.requestDevice({filters: self.filters })
     .then(handleDevice)
     .catch(function(err){
       self.emit('error', err);
