@@ -1,0 +1,13 @@
+{
+	"compilerOptions": {
+		"sourceMap": true,
+		"declaration": true,
+		"strict": true,
+		"module": "commonjs",
+		"target": "ES2015",
+		"lib": [
+			"dom",
+			"es2019"
+		],
+	},
+}

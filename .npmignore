@@ -1,0 +1,4 @@
+*.ts
+*.md
+/example/
+tsconfig.json
