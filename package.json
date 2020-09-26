@@ -1,11 +1,12 @@
 {
   "name": "ts-webusb-serial",
-  "version": "2.1.7",
+  "version": "2.1.8",
   "description": "TS Fork of webusb-serial",
   "main": "index.js",
   "repository": "git@github.com:hyldmo/webusb-serial.git",
   "scripts": {
-    "build": "tsc"
+    "build": "tsc && cp package.json *.md ./dist/",
+    "dist": "cd dist && npm publish"
   },
   "author": "Eivind Hyldmo",
   "license": "MIT",
@@ -15,6 +16,7 @@
   },
   "devDependencies": {
     "@types/node": "^14.11.2",
+    "@types/w3c-web-usb": "^1.0.4",
     "typescript": "^4.0.3"
   }
 }

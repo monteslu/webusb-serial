@@ -2,8 +2,5 @@ node_modules/
 .DS_Store
 
 dist/
-*.js
-*.js.map
-*.d.ts
 
 *.log
